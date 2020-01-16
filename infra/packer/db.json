@@ -13,9 +13,10 @@
     ],
     "provisioners": [
       {
-        "type": "shell",
-        "script": "scripts/install_mongo.sh",
-        "execute_command": "sudo {{.Path}}"
+        "type": "ansible",
+        "groups": [ "db" ],
+        "playbook_file": "./../ansible/reddit_app.yml",
+        "user": "appuser"
       }
     ]
   }

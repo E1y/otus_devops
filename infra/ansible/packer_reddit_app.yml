@@ -17,33 +17,6 @@
       state: present
       user_install: no
 
-# Setup and configure mongodb for reddit app
-- name: "Reddit App: Install mongodb"
-  hosts: db
-  become: yes
-  gather_facts: no
-
-  tasks:
-  - name: Added mongodb package
-    shell: 'echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" > /etc/apt/sources.list.d/mongodb-org-3.2.list'
-  
-  - name: Install mongodb package    
-    apt:
-      name: mongodb-org
-      state: present
-      update_cache: yes
-      allow_unauthenticated: yes
-
-  - name: Open connect for 0.0.0.0/0
-    shell: sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
-
-  - name: Enable and start Mongo DB service
-    systemd:
-      name: mongod
-      enabled: yes
-      state: started
-
-  
 # Deploy reddit app
 - name: "Reddit App: Deploy application"
   hosts: app

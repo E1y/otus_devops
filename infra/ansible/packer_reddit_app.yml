@@ -29,6 +29,7 @@
       state: directory
       dest: /opt/reddit
       owner: appuser
+      group: appuser
 
   - name: Clone git repo
     git:

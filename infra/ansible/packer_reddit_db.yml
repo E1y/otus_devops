@@ -25,7 +25,4 @@
       mode: 0644
 
   - name: Enable and start Mongo DB service
-    systemd:
-      name: mongod
-      enabled: yes
-      state: started
+    service: name=mongod enabled=yes state=started

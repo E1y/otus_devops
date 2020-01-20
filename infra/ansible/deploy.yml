@@ -2,9 +2,6 @@
   hosts: app
   become: true
 
-  vars: 
-    db_host: 10.156.0.49
-
   tasks:
   - name: Fetch the latest version of applocatiob code
     git:

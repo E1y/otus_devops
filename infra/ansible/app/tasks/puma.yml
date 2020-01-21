@@ -1,0 +1,22 @@
+---
+- name: Add unit file for Puma
+  template: 
+    src: puma.service.j2
+    dest: /etc/systemd/system/puma.service
+  notify: reload puma
+
+- name: Fetch the latest version of applocatiob code
+  git:
+    repo: 'https://github.com/Artemmkin/raddit.git'
+    dest: /opt/reddit
+    force: yes
+
+- name:
+  template:
+    src: db_config.j2
+    dest: /opt/reddit/db_config
+    owner: "{{ deploy_user }}"
+    group: "{{ deploy_user }}"
+
+- name: enable puma
+  systemd: name=puma enabled=yes

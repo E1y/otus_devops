@@ -14,7 +14,7 @@
     bundler:
       state: present
       chdir: /opt/reddit
-#      user_install: no
+      user_install: no
     notify: restart puma
 
   handlers:

@@ -9,7 +9,7 @@ RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 ADD Gemfile* $APP_HOME/
 RUN bundle update --bundler && bundle install
-COPY . $APP_HOME
+ADD . $APP_HOME
 
 ENV COMMENT_DATABASE_HOST comment_db
 ENV COMMENT_DATABASE comments

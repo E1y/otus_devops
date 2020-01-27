@@ -19,7 +19,7 @@ resource "google_compute_instance" "gitlab" {
     }
 
     metadata = {
-        sshKey = "${var.ssh_user}:${file(var.public_key_path)}"
+        ssh-keys = "${var.ssh_user}:${file(var.public_key_path)}"
     }
 
     connection {

@@ -1,7 +1,0 @@
-- name: "Configure App server"
-  hosts: app
-  gather_facts: no
-  become: yes
-
-  roles:
-    - app

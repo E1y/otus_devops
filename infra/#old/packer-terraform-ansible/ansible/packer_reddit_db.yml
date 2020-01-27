@@ -1,0 +1,10 @@
+- name: "Configure DB server"
+  hosts: db
+  become: yes
+  gather_facts: no
+
+  vars: 
+    mongo_bind_ip: 0.0.0.0
+
+  roles:
+    - db

@@ -8,8 +8,10 @@
       raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
       changed_when: false
   
+  roles:
+    - role: docker
+    - role: gitlab
+
   tasks:
-    - name: Install Docker-ce & Docker-compose
-      include_tasks: docker_install.yml
-    
-    - name: Create Docker-compose config
+    - name: Run docker-compose
+      shell: cd /srv/gitlab && docker-compose up -d

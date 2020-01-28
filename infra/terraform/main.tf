@@ -6,7 +6,9 @@ resource "google_compute_instance" "gitlab" {
     name            = "gitlab-ci"
     machine_type    = var.machine_type
     zone            = var.zone
-    tags            = ["gitlab-ci"]
+    tags            = [ "gitlab-ci", 
+                        "http-server", 
+                        "https-server"]
     boot_disk {
         initialize_params {
             image = var.disk_image

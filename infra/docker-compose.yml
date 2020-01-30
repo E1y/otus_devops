@@ -1,0 +1,49 @@
+version: '3.3'
+services:
+  mongo_db:
+    image: mongo:3.2
+    volumes:
+      - post_db:/data/db
+    networks:
+      reddit:
+        aliases:
+          - post_db
+          - comment_db
+  ui:
+    image: e1y16rus/ui:latest
+    ports:
+      - 9292:9292/tcp
+    networks:
+      - reddit
+  post:
+    image: e1y16rus/post:latest
+    networks:
+      - reddit
+  comment:
+    image: e1y16rus/comment:latest
+    networks:
+      - reddit
+  prometeus:
+    image: e1y16rus/prometheus:latest
+    ports:
+      - '9090:9090'
+    networks:
+      - reddit
+  node-exporter:
+    image: prom/node-exporter:v0.18.0
+    user: root
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"'
+    networks:
+      - reddit
+volumes:
+  post_db:
+
+networks:
+  reddit:

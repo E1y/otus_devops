@@ -10,3 +10,5 @@ start.sh
 infra/ansible/hosts
 infra/ansible/ansible.cfg
 gitlab/
+.git
+.gti*

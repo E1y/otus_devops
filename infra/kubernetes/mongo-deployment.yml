@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -5,22 +6,22 @@ metadata:
   labels:
     app: reddit
     component: mongo
-    comment-db: "true"
     post-db: "true"
+    comment-db: "true"
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: reddit
       component: mongo
   template:
     metadata:
-      name: mongo-pod
+      name: mongo
       labels:
         app: reddit
         component: mongo
-        comment-db: "true"
         post-db: "true"
+        comment-db: "true"
     spec:
       containers:
       - image: mongo:3.2
@@ -30,4 +31,5 @@ spec:
           mountPath: /data/db
       volumes:
       - name: mongo-persistent-storage
-        emptyDir: {}
+        persistentVolumeClaim:
+          claimName: mongo-pvc-dynamic
